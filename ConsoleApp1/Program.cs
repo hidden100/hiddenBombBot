@@ -10,6 +10,7 @@ namespace ConsoleApp1
 {
     class Program
     {
+
         static void Main(string[] args)
         {
             Thread botTask = new Thread(BotCycle);
@@ -20,11 +21,12 @@ namespace ConsoleApp1
             botTask.Start();
             breakTask.Start();
         }
-
+        static string basePath;
         static int PERIODOERROR;
         static int PERIODOHEROISPARATRABALHAR;
         static int PERIODONEWMAP;
         static int PERIODOSAIRMAPA;
+        static int DELAY;
 
         private static void SetTimeConstants()
         {
@@ -32,6 +34,8 @@ namespace ConsoleApp1
             PERIODOHEROISPARATRABALHAR = int.Parse(SettingHelper.ReadSetting(Constantes.PERIODOHEROISPARATRABALHAR));
             PERIODONEWMAP = int.Parse(SettingHelper.ReadSetting(Constantes.PERIODONEWMAP));
             PERIODOSAIRMAPA = int.Parse(SettingHelper.ReadSetting(Constantes.PERIODOSAIRMAPA));
+            basePath = SettingHelper.ReadSetting(Constantes.IMAGEPATH);
+            DELAY = int.Parse(SettingHelper.ReadSetting(Constantes.DELAY));
         }
 
         private static void BotCycle()
@@ -47,10 +51,10 @@ namespace ConsoleApp1
                 {
                     HeroisPraTrabalhar();
                 }
-                if (minuts % PERIODONEWMAP == 0)
-                {
-                    NewMap();
-                }
+                //if (minuts % PERIODONEWMAP == 0)
+                //{
+                //    NewMap();
+                //}
                 if (minuts % PERIODOSAIRMAPA== 0)
                 {
                     ResetMap();
@@ -111,17 +115,83 @@ namespace ConsoleApp1
 
         private static void ProcuraErro()
         {
-            MessageBox.Show("Procura erro");
+            APertaBotaoOKDoErro();
+            Thread.Sleep(DELAY);
+            Thread.Sleep(10000);
+            ApertaBotaoConnectWallet();
+            Thread.Sleep(DELAY + 4000);
+            APertaBotaoAssinar();
+            Thread.Sleep(DELAY+ 15000);
+            ApertaBotaoTreasureHunt();
+          
+        }
+
+        private static void APertaBotaoAssinar()
+        {
+            MouseClickHelper.ClickOnImage(basePath + @"\Assinar.png");
+            Console.WriteLine("Deveria ter apertado Assinar");
+        }
+
+        private static void ApertaBotaoConnectWallet()
+        {
+            MouseClickHelper.ClickOnImage(basePath + @"\connectWallet.png");
+            Console.WriteLine("Deveria ter apertado connect wallet");
+        }
+
+        private static void APertaBotaoOKDoErro()
+        {
+            MouseClickHelper.ClickOnImage(basePath + @"\OKError.png");
+            Console.WriteLine("Deveria ter aertado botao ok de erro");
         }
 
         private static void ResetMap()
         {
-            MessageBox.Show("Reset Map");
+            ApertaBotaoDeSaida();
+            Thread.Sleep(DELAY);
+            ApertaBotaoTreasureHunt();
         }
 
         private static void HeroisPraTrabalhar()
         {
-            MessageBox.Show("Herois Para trabalhar");
+            ApertaBotaoDeSaida();
+            Thread.Sleep(DELAY);
+            ApertaBotaoHerois();
+            Thread.Sleep(DELAY);
+            ApertaWorkPossiveis();
+            Thread.Sleep(DELAY);
+            ApertaBotaoSair();
+            Thread.Sleep(DELAY);
+            ApertaBotaoTreasureHunt();
+        }
+
+        private static void ApertaBotaoTreasureHunt()
+        {
+            MouseClickHelper.ClickOnImage(basePath + @"\treasurehunt.png");
+            Console.WriteLine("Deveria ter apertado TreasureHunt");
+        }
+
+        private static void ApertaBotaoSair()
+        {
+            MouseClickHelper.ClickOnImage(basePath + @"\sairHerois.png");
+            Console.WriteLine("Deveria ter apertado sair herois");
+        }
+
+        private static void ApertaWorkPossiveis()
+        {
+            MouseClickHelper.ClickOnImage(basePath + @"\allHeros.png");
+            Console.WriteLine("Deveria ter apertado botao all");
+        }
+
+        private static void ApertaBotaoHerois()
+        {
+            MouseClickHelper.ClickOnImage(basePath + @"\heroesButton.png");
+            Console.WriteLine("Deveria ter apertado hero");
+        }
+
+        private static void ApertaBotaoDeSaida()
+        {
+            MouseClickHelper.ClickOnImage(basePath + @"\LeaveButton.png");
+            Console.WriteLine("Deveria ter apertado sair mapa");
         }
     }
 }

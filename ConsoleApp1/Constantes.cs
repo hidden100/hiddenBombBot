@@ -12,5 +12,7 @@ namespace ConsoleApp1
         public  const string PERIODOHEROISPARATRABALHAR = "PERIODOHEROISPARATRABALHAR";
         public  const string PERIODONEWMAP = "PERIODONEWMAP";
         public  const string PERIODOERROR = "PERIODOERROR";
+        public const string IMAGEPATH = "IMAGEPATH";
+        public const string DELAY = "DELAY";
     }
 }
