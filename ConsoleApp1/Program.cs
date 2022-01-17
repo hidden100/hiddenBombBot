@@ -13,14 +13,27 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
-            Thread botTask = new Thread(BotCycle);
-            Thread breakTask = new Thread(() =>BreackCycle(botTask));
-            SetTimeConstants();
-          
-
-            botTask.Start();
-            breakTask.Start();
+            Start();
         }
+
+        private static void Start()
+        {
+            try
+            {
+                Thread botTask = new Thread(BotCycle);
+                Thread breakTask = new Thread(() => BreackCycle(botTask));
+                SetTimeConstants();
+
+
+                botTask.Start();
+                breakTask.Start();
+            }
+            catch(Exception ex)
+            {
+                Start();
+            }
+        }
+
         static string basePath;
         static int PERIODOERROR;
         static int PERIODOHEROISPARATRABALHAR;

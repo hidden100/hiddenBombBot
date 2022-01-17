@@ -19,18 +19,20 @@ namespace ConsoleApp1
                                            PixelFormat.Format24bppRgb);
 
             // Create a graphics object from the bitmap.
-            var gfxScreenshot = Graphics.FromImage(bmpScreenshot);
+            using (var gfxScreenshot = Graphics.FromImage(bmpScreenshot))
+            {
 
-            // Take the screenshot from the upper left corner to the right bottom corner.
-            gfxScreenshot.CopyFromScreen(0,
-                                        0,
-                                        0,
-                                        0,
-                                        Screen.PrimaryScreen.Bounds.Size,
-                                        CopyPixelOperation.SourceCopy);
+                // Take the screenshot from the upper left corner to the right bottom corner.
+                gfxScreenshot.CopyFromScreen(0,
+                                            0,
+                                            0,
+                                            0,
+                                            Screen.PrimaryScreen.Bounds.Size,
+                                            CopyPixelOperation.SourceCopy);
 
-            // Save the screenshot to the specified path that the user has chosen.
-            bmpScreenshot.Save(@"D:\ImagemROBO\Screenshot.png", ImageFormat.Png);
+                // Save the screenshot to the specified path that the user has chosen.
+                bmpScreenshot.Save(@"D:\ImagemROBO\Screenshot.png", ImageFormat.Png);
+            }
             return bmpScreenshot;
         }
 
