@@ -59,11 +59,15 @@ namespace ConsoleApp1
                         Point? toClick = CompareImageFromPoint(printScreen, toFind, i, j);
                         if( toClick != null)
                         {
+                            printScreen.Dispose();
+                            toFind.Dispose();
                             return toClick.Value;
                         }
                     }
                 }
             }
+            printScreen.Dispose();
+            toFind.Dispose();
             return null;
         }
 
