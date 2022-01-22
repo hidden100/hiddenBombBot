@@ -72,9 +72,17 @@ namespace ConsoleApp1
                 {
                     ResetMap();
                 }
+                if(minuts % 10 == 0)
+                {
+                    Console.Clear();
+                }
 
                 Thread.Sleep(60000);
                 minuts++;
+                if(minuts > 1000)
+                {
+                    minuts = 1;
+                }
             }
         }
 
@@ -112,6 +120,11 @@ namespace ConsoleApp1
                     if(key == ConsoleKey.R)
                     {
                         NewMap();
+                    }
+                    else
+                    if (key == ConsoleKey.C)
+                    {
+                        Console.Clear();
                     }
                 }
 
