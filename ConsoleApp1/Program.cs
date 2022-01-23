@@ -141,14 +141,16 @@ namespace ConsoleApp1
 
         private static void ProcuraErro()
         {
-            APertaBotaoOKDoErro();
-            Thread.Sleep(DELAY);
-            Thread.Sleep(10000);
-            ApertaBotaoConnectWallet();
-            Thread.Sleep(DELAY + 4000);
-            APertaBotaoAssinar();
-            Thread.Sleep(DELAY+ 15000);
-            ApertaBotaoTreasureHunt();
+            if (APertaBotaoOKDoErro())
+            {
+                Thread.Sleep(DELAY);
+                Thread.Sleep(10000);
+                ApertaBotaoConnectWallet();
+                Thread.Sleep(DELAY + 4000);
+                APertaBotaoAssinar();
+                Thread.Sleep(DELAY + 15000);
+                ApertaBotaoTreasureHunt();
+            }
           
         }
 
@@ -164,10 +166,11 @@ namespace ConsoleApp1
             Console.WriteLine("Deveria ter apertado connect wallet");
         }
 
-        private static void APertaBotaoOKDoErro()
+        private static bool APertaBotaoOKDoErro()
         {
-            MouseClickHelper.ClickOnImage(basePath + @"\OKError.png");
+            bool clickou = MouseClickHelper.ClickOnImage(basePath + @"\OKError.png");
             Console.WriteLine("Deveria ter aertado botao ok de erro");
+            return clickou;
         }
 
         private static void ResetMap()

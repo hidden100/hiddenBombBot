@@ -11,7 +11,7 @@ namespace ConsoleApp1
 {
     public static class MouseClickHelper
     {
-        public static void ClickOnImage(string path)
+        public static bool ClickOnImage(string path)
         {
             Point? toClick = ImageHelper.FindImageOnPScreen(path);
             if (toClick != null)
@@ -20,7 +20,9 @@ namespace ConsoleApp1
                 Thread.Sleep(500);
                 DoMouseClick();
                 Thread.Sleep(500);
+                return true;
             }
+            return false;
         }
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
