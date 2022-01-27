@@ -141,29 +141,45 @@ namespace ConsoleApp1
 
         private static void ProcuraErro()
         {
+            int delay1 = 0;
+            int delay2 = 0;
+            int delay3 = 0;
             if (APertaBotaoOKDoErro())
             {
-                Thread.Sleep(DELAY);
-                Thread.Sleep(10000);
-                ApertaBotaoConnectWallet();
-                Thread.Sleep(DELAY + 4000);
-                APertaBotaoAssinar();
-                Thread.Sleep(DELAY + 15000);
-                ApertaBotaoTreasureHunt();
+                delay1 = 10000;
             }
-          
+
+
+            Thread.Sleep(DELAY);
+            Thread.Sleep(delay1);
+
+            if (ApertaBotaoConnectWallet())
+            {
+                delay2 = 4000;
+            }
+            Thread.Sleep(DELAY + delay2);
+
+            if (APertaBotaoAssinar())
+            {
+                delay3 = 15000;
+            }
+            Thread.Sleep(DELAY + delay3);
+            ApertaBotaoTreasureHunt();
+
         }
 
-        private static void APertaBotaoAssinar()
+        private static bool APertaBotaoAssinar()
         {
-            MouseClickHelper.ClickOnImage(basePath + @"\Assinar.png");
+           bool found = MouseClickHelper.ClickOnImage(basePath + @"\Assinar.png");
             Console.WriteLine("Deveria ter apertado Assinar");
+            return found;
         }
 
-        private static void ApertaBotaoConnectWallet()
+        private static bool ApertaBotaoConnectWallet()
         {
-            MouseClickHelper.ClickOnImage(basePath + @"\connectWallet.png");
+           bool found = MouseClickHelper.ClickOnImage(basePath + @"\connectWallet.png");
             Console.WriteLine("Deveria ter apertado connect wallet");
+            return found;
         }
 
         private static bool APertaBotaoOKDoErro()
